@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -51,6 +51,17 @@ const categories = [
 
 export default function Categories() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -129,32 +140,39 @@ export default function Categories() {
                     sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                   />
                   
-                  {/* Dark Overlay - Shows on Hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
+                  {/* Dark Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-60 transition-opacity duration-500" />
                   
                   {/* Gradient Overlay Bottom */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--primary)]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--primary)]/20 via-transparent to-transparent opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
 
                 {/* Content */}
                 <div className="absolute inset-0 flex flex-col justify-end p-4 md:p-6">
                   {/* Category Name */}
-                  <h3 className="text-white text-lg md:text-xl font-bold font-[var(--font-playfair)] mb-1 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 className="text-white text-lg md:text-xl font-bold font-[var(--font-playfair)] mb-1 transform md:translate-y-2 md:group-hover:translate-y-0 transition-transform duration-300">
                     {category.name}
                   </h3>
                   
                   {/* Product Count */}
-                  <p className="text-white/70 text-xs md:text-sm mb-3 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                  <p className="text-white/70 text-xs md:text-sm mb-3 transform md:translate-y-2 md:group-hover:translate-y-0 transition-transform duration-300 delay-75">
                     {category.count}
                   </p>
 
-                  {/* Shop Now Button - Slides on Hover */}
+                  {/* Shop Now Button - Always visible on mobile, hover on desktop */}
                   <div className="relative overflow-hidden">
-                    <div className="flex items-center gap-2 text-white text-sm font-medium transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500">
+                    <div className={`
+                      flex items-center gap-2 text-white text-sm font-medium
+                      transition-transform duration-500
+                      ${isMobile 
+                        ? 'translate-x-0' 
+                        : '-translate-x-full md:group-hover:translate-x-0'
+                      }
+                    `}>
                       <span className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded hover:bg-white/30 transition-colors">
                         Shop Now
                         <svg
-                          className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
+                          className="w-4 h-4 transition-transform duration-300"
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
@@ -172,7 +190,7 @@ export default function Categories() {
                 </div>
 
                 {/* Decorative Border Glow */}
-                <div className="absolute inset-0 rounded ring-1 ring-white/0 group-hover:ring-white/20 transition-all duration-500 pointer-events-none" />
+                <div className="absolute inset-0 rounded ring-1 ring-white/0 md:group-hover:ring-white/20 transition-all duration-500 pointer-events-none" />
               </Link>
             </div>
           ))}
