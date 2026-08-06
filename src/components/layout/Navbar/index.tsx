@@ -2,19 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useTheme } from "next-themes";
-import { Search, Sun, Moon, Menu } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
+import { Search, Menu } from "lucide-react";
 import MegaMenu from "./MegaMenu";
-import SearchModal from "./SearchModal";
 import MobileMenu from "./MobileMenu";
-import { navLinks, WHATSAPP_NUMBER } from "@/constants/navbar";
+import { navLinks } from "@/constants/navbar";
 
 export default function Navbar() {
-  const { theme, setTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [catHover, setCatHover] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
@@ -62,35 +57,36 @@ export default function Navbar() {
             </li>
           </ul>
 
-          {/* Right Icons */}
-          <div className="flex items-center gap-2">
-            <button onClick={() => setSearchOpen(true)}
-              className="p-2 text-[var(--foreground)] hover:text-[var(--primary)] transition-colors">
-              <Search size={18} />
+          {/* Right Side */}
+          <div className="flex items-center gap-3">
+            {/* Search Box - Desktop */}
+            <div className="hidden md:flex items-center gap-2 bg-[var(--surface)] border border-[var(--border)] rounded-lg px-3 py-2 w-52 focus-within:border-[var(--primary)] transition-colors">
+              <Search size={15} className="text-[var(--muted-foreground)] shrink-0" />
+              <input
+                type="text"
+                placeholder="Search products..."
+                className="bg-transparent outline-none text-sm text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] w-full"
+              />
+            </div>
+
+            {/* Search Icon - Mobile */}
+            <button className="md:hidden p-2 text-[var(--foreground)] hover:text-[var(--primary)] transition-colors">
+              <Search size={20} />
             </button>
-            <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2 text-[var(--foreground)] hover:text-[var(--primary)] transition-colors hidden md:flex">
-              {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-            <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer"
-              className="p-2 text-[var(--foreground)] hover:text-[var(--primary)] transition-colors hidden md:flex">
-              <FaWhatsapp size={18} />
-            </a>
+
             <Link href="/products"
-              className="hidden md:inline-flex items-center px-4 py-2 text-sm bg-[var(--primary)] text-white rounded-lg hover:opacity-90 transition-opacity ml-1">
+              className="hidden md:inline-flex items-center px-4 py-2 text-sm bg-[var(--primary)] text-white rounded-lg hover:opacity-90 transition-opacity">
               Shop Now
             </Link>
 
             {/* Mobile Menu Button */}
-            <button onClick={() => setMobileOpen(true)}
-              className="p-2 md:hidden text-[var(--foreground)] hover:text-[var(--primary)] transition-colors">
+            <button onClick={() => setMobileOpen(true)} className="p-2 md:hidden text-[var(--foreground)] hover:text-[var(--primary)] transition-colors">
               <Menu size={22} />
             </button>
           </div>
         </div>
       </nav>
 
-      {searchOpen && <SearchModal onClose={() => setSearchOpen(false)} />}
       {mobileOpen && <MobileMenu onClose={() => setMobileOpen(false)} />}
     </>
   );
