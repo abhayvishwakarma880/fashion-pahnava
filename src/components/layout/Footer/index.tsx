@@ -41,7 +41,7 @@ export default function Footer() {
       </div>
 
       {/* Trust Features */}
-      <div className="border-t border-[#2B2B2B]">
+      {/* <div className="border-t border-[#2B2B2B]">
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {trustFeatures.map(({ icon: Icon, title, desc }) => (
@@ -57,7 +57,7 @@ export default function Footer() {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Payment Methods */}
       <div className="border-t border-[#2B2B2B]">

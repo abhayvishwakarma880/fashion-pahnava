@@ -11,12 +11,11 @@ const bestSellers = [
     category: "Ethnic Wear",
     price: 3499,
     originalPrice: 4999,
-    rating: 4.9,
-    reviews: 1247,
     image: "https://i.pinimg.com/474x/89/71/57/89715740b94af3e36559d2f82a82667b.jpg?nii=t",
     badge: "Best Seller",
     badgeColor: "from-amber-500 to-orange-600",
     soldCount: "2.5K+ sold",
+    description: "Pure silk saree with intricate golden border and traditional zari work.",
   },
   {
     id: 2,
@@ -24,12 +23,11 @@ const bestSellers = [
     category: "Western Wear",
     price: 4499,
     originalPrice: 6999,
-    rating: 4.8,
-    reviews: 856,
     image: "https://i.pinimg.com/474x/f8/fe/a3/f8fea33af02a4ed02033f3dc97894b42.jpg?nii=t",
     badge: "Best Seller",
     badgeColor: "from-amber-500 to-orange-600",
     soldCount: "1.8K+ sold",
+    description: "Genuine leather jacket with premium finish perfect for winter fashion.",
   },
   {
     id: 3,
@@ -37,12 +35,11 @@ const bestSellers = [
     category: "Ethnic Wear",
     price: 8999,
     originalPrice: 12999,
-    rating: 4.9,
-    reviews: 2134,
     image: "https://i.pinimg.com/originals/8a/db/d8/8adbd824b14afa78db10ca20ee454c18.jpg?nii=t",
     badge: "Best Seller",
     badgeColor: "from-amber-500 to-orange-600",
     soldCount: "3.2K+ sold",
+    description: "Handwoven Banarasi saree with rich silk fabric and intricate patterns.",
   },
   {
     id: 4,
@@ -50,12 +47,11 @@ const bestSellers = [
     category: "Men's Wear",
     price: 3499,
     originalPrice: 4999,
-    rating: 4.7,
-    reviews: 654,
     image: "https://avatars.mds.yandex.net/i?id=6b4fe474d3d57523827dc4e64ad530c730089dc7-16401366-images-thumbs&n=13",
     badge: "Best Seller",
     badgeColor: "from-amber-500 to-orange-600",
     soldCount: "1.2K+ sold",
+    description: "Premium slim fit blazer perfect for formal occasions and business meetings.",
   },
   {
     id: 5,
@@ -63,12 +59,11 @@ const bestSellers = [
     category: "Men's Wear",
     price: 3999,
     originalPrice: 5999,
-    rating: 4.8,
-    reviews: 978,
     image: "https://i.pinimg.com/736x/64/4d/9f/644d9fef85e21ff063503a2a8badd86f.jpg",
     badge: "Best Seller",
     badgeColor: "from-amber-500 to-orange-600",
     soldCount: "1.5K+ sold",
+    description: "Handcrafted kurta set with intricate embroidery for wedding celebrations.",
   },
   {
     id: 6,
@@ -76,18 +71,15 @@ const bestSellers = [
     category: "Accessories",
     price: 1299,
     originalPrice: 1999,
-    rating: 4.6,
-    reviews: 543,
     image: "https://i.pinimg.com/736x/2a/bf/3b/2abf3bc87f9d23b6df616d9451e72815.jpg",
     badge: "Best Seller",
     badgeColor: "from-amber-500 to-orange-600",
     soldCount: "980+ sold",
+    description: "Beautiful oxidized silver jewelry set with traditional Indian designs.",
   },
 ];
 
 export default function BestSellers() {
-  const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
-  const [wishlist, setWishlist] = useState<number[]>([]);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -113,41 +105,6 @@ export default function BestSellers() {
 
     return () => observer.disconnect();
   }, []);
-
-  const toggleWishlist = (productId: number) => {
-    setWishlist((prev) =>
-      prev.includes(productId)
-        ? prev.filter((id) => id !== productId)
-        : [...prev, productId]
-    );
-  };
-
-  const renderStars = (rating: number) => {
-    const fullStars = Math.floor(rating);
-    const halfStar = rating % 1 >= 0.5;
-    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
-
-    return (
-      <div className="flex items-center gap-0.5">
-        {[...Array(fullStars)].map((_, i) => (
-          <svg key={`full-${i}`} className="w-3.5 h-3.5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-          </svg>
-        ))}
-        {halfStar && (
-          <svg className="w-3.5 h-3.5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-          </svg>
-        )}
-        {[...Array(emptyStars)].map((_, i) => (
-          <svg key={`empty-${i}`} className="w-3.5 h-3.5 text-gray-300 dark:text-gray-600 fill-current" viewBox="0 0 20 20">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-          </svg>
-        ))}
-        <span className="ml-1 text-xs text-[var(--muted-foreground)]">({rating})</span>
-      </div>
-    );
-  };
 
   return (
     <section
@@ -197,119 +154,91 @@ export default function BestSellers() {
           </Link>
         </div>
 
-        {/* Products Grid - Large Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        {/* Products Grid - 2 columns mobile, 3 columns desktop */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
           {bestSellers.map((product) => (
             <div
               key={product.id}
               className="product-card opacity-0 transform translate-y-8 transition-all duration-700"
-              onMouseEnter={() => setHoveredProduct(product.id)}
-              onMouseLeave={() => setHoveredProduct(null)}
             >
               <div className="group relative bg-[var(--card)] rounded overflow-hidden border border-[var(--border)] hover:shadow-2xl hover:shadow-[var(--primary)]/10 transition-all duration-500 hover:-translate-y-2">
                 
-                {/* Product Image - Larger */}
+                {/* Product Image */}
                 <div className="relative aspect-[4/3] overflow-hidden bg-[var(--surface)]">
                   <Image
                     src={product.image}
                     alt={product.name}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     priority={product.id <= 3}
                   />
 
-                  {/* Best Seller Badge - Large */}
-                  <div className="absolute top-4 left-4 z-10">
+                  {/* Best Seller Badge */}
+                  <div className="absolute top-2 left-2 z-10">
                     <div className={`
                       relative bg-gradient-to-r ${product.badgeColor}
-                      text-white px-4 py-2 rounded
+                      text-white px-2 md:px-3 py-1 md:py-1.5 rounded
                       shadow-lg shadow-orange-500/30
-                      flex items-center gap-2
-                      transform -rotate-3
+                      flex items-center gap-1 md:gap-2
+                      transform -rotate-2
                       group-hover:rotate-0 transition-transform duration-500
                     `}>
-                      <span className="text-lg">🏆</span>
+                      <span className="text-sm md:text-lg">🏆</span>
                       <div>
-                        <span className="text-xs font-bold uppercase tracking-wider">Best Seller</span>
-                        <span className="block text-[10px] opacity-80">{product.soldCount}</span>
+                        <span className="text-[8px] md:text-xs font-bold uppercase tracking-wider">Best Seller</span>
+                        <span className="block text-[8px] md:text-[10px] opacity-80">{product.soldCount}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Discount Badge */}
                   {product.originalPrice && (
-                    <div className="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded shadow-lg z-10">
+                    <div className="absolute top-2 right-2 bg-red-500 text-white text-[8px] md:text-xs font-bold px-1.5 md:px-3 py-0.5 md:py-1.5 rounded shadow-lg z-10">
                       {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
                     </div>
                   )}
-
-                  {/* Hover Actions */}
-                  <div className="absolute inset-0 bg-black/50 dark:bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-4 z-10">
-                    <button className="bg-white dark:bg-[var(--card)] text-[var(--foreground)] p-3.5 rounded-full hover:bg-[var(--primary)] hover:text-white transition-all duration-300 transform -translate-y-3 group-hover:translate-y-0 shadow-lg border border-[var(--border)] dark:border-gray-700">
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                      </svg>
-                    </button>
-                    <button 
-                      onClick={() => toggleWishlist(product.id)}
-                      className="bg-white dark:bg-[var(--card)] text-[var(--foreground)] p-3.5 rounded-full hover:bg-red-500 hover:text-white transition-all duration-300 transform -translate-y-3 group-hover:translate-y-0 shadow-lg border border-[var(--border)] dark:border-gray-700"
-                    >
-                      <svg className="w-5 h-5" fill={wishlist.includes(product.id) ? "currentColor" : "none"} viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                      </svg>
-                    </button>
-                    <button className="bg-white dark:bg-[var(--card)] text-[var(--foreground)] p-3.5 rounded-full hover:bg-[var(--primary)] hover:text-white transition-all duration-300 transform -translate-y-3 group-hover:translate-y-0 shadow-lg border border-[var(--border)] dark:border-gray-700">
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                      </svg>
-                    </button>
-                  </div>
                 </div>
 
                 {/* Product Info */}
-                <div className="p-4 md:p-5">
-                  <div className="flex items-start justify-between mb-1">
-                    <div>
-                      <p className="text-[10px] text-[var(--muted-foreground)] uppercase tracking-wider font-medium">
+                <div className="p-2.5 md:p-4">
+                  <div className="flex items-start justify-between mb-0.5 gap-2">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[8px] md:text-[10px] text-[var(--muted-foreground)] uppercase tracking-wider font-medium">
                         {product.category}
                       </p>
-                      <h3 className="text-base md:text-lg font-semibold text-[var(--foreground)] line-clamp-1 group-hover:text-[var(--primary)] transition-colors">
+                      <h3 className="text-xs md:text-base font-semibold text-[var(--foreground)] line-clamp-1 group-hover:text-[var(--primary)] transition-colors">
                         {product.name}
                       </h3>
                     </div>
-                    <span className="text-xs font-semibold text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-950/30 px-2 py-1 rounded-full">
+                    <span className="text-[8px] md:text-xs font-semibold text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-950/30 px-1.5 md:px-2 py-0.5 md:py-1 rounded-full whitespace-nowrap">
                       {product.soldCount}
                     </span>
                   </div>
                   
-                  {/* Rating */}
-                  <div className="mb-2">
-                    {renderStars(product.rating)}
-                    <span className="ml-2 text-xs text-[var(--muted-foreground)]">
-                      ({product.reviews.toLocaleString()} reviews)
-                    </span>
-                  </div>
+                  {/* Description - 2 lines */}
+                  <p className="text-[10px] md:text-xs text-[var(--muted-foreground)] mb-1.5 md:mb-2 line-clamp-2 leading-relaxed">
+                    {product.description}
+                  </p>
 
                   {/* Price */}
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-xl md:text-2xl font-bold text-[var(--primary)] font-[var(--font-playfair)]">
+                  <div className="flex items-center gap-1.5 md:gap-3 mb-1.5 md:mb-2.5">
+                    <span className="text-sm md:text-xl font-bold text-[var(--primary)] font-[var(--font-playfair)]">
                       ₹{product.price.toLocaleString()}
                     </span>
                     {product.originalPrice && (
-                      <span className="text-sm text-[var(--muted-foreground)] line-through">
+                      <span className="text-[10px] md:text-sm text-[var(--muted-foreground)] line-through">
                         ₹{product.originalPrice.toLocaleString()}
                       </span>
                     )}
                   </div>
 
-                  {/* Add to Cart Button - Larger */}
-                  <button className="w-full bg-[var(--primary)] text-white py-3 rounded text-sm font-medium hover:opacity-90 transition-all hover:shadow-lg hover:shadow-[var(--primary)]/30 transform hover:scale-[1.02] duration-300 flex items-center justify-center gap-2 group">
-                    <svg className="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  {/* Book Now Button */}
+                  <button className="w-full bg-[var(--primary)] text-white py-1.5 md:py-2.5 rounded text-[10px] md:text-sm font-medium hover:opacity-90 transition-all hover:shadow-lg hover:shadow-[var(--primary)]/30 transform hover:scale-[1.02] duration-300 flex items-center justify-center gap-1.5 md:gap-2 group">
+                    <svg className="w-3 h-3 md:w-4 md:h-4 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                     </svg>
-                    Add to Cart
+                    Book Now
                   </button>
                 </div>
               </div>
@@ -318,21 +247,21 @@ export default function BestSellers() {
         </div>
 
         {/* CTA Banner */}
-        <div className="mt-12 bg-gradient-to-r from-[var(--primary)]/10 to-[var(--accent)]/10 rounded p-6 md:p-8 border border-[var(--border)]">
+        <div className="mt-12 bg-gradient-to-r from-[var(--primary)]/10 to-[var(--accent)]/10 rounded p-4 md:p-8 border border-[var(--border)]">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <span className="text-4xl">🎯</span>
+            <div className="flex items-center gap-3 md:gap-4">
+              <span className="text-3xl md:text-4xl">🎯</span>
               <div>
-                <h4 className="text-lg font-bold text-[var(--foreground)]">Love What You See?</h4>
-                <p className="text-sm text-[var(--muted-foreground)]">These bestsellers are flying off the shelves</p>
+                <h4 className="text-base md:text-lg font-bold text-[var(--foreground)]">Love What You See?</h4>
+                <p className="text-xs md:text-sm text-[var(--muted-foreground)]">These bestsellers are flying off the shelves</p>
               </div>
             </div>
             <Link
               href="/products"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-[var(--primary)] text-white rounded text-sm font-medium hover:opacity-90 transition-all hover:shadow-lg hover:shadow-[var(--primary)]/30 transform hover:scale-105 duration-300 whitespace-nowrap"
+              className="inline-flex items-center gap-2 px-6 md:px-8 py-2 md:py-3 bg-[var(--primary)] text-white rounded text-xs md:text-sm font-medium hover:opacity-90 transition-all hover:shadow-lg hover:shadow-[var(--primary)]/30 transform hover:scale-105 duration-300 whitespace-nowrap"
             >
               Shop Best Sellers
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-3.5 md:w-4 h-3.5 md:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
@@ -349,6 +278,13 @@ export default function BestSellers() {
         .line-clamp-1 {
           display: -webkit-box;
           -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        
+        .line-clamp-2 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
         }
