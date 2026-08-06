@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Search, Menu } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Menu } from "lucide-react";
+import Image from "next/image";
 import MegaMenu from "./MegaMenu";
 import MobileMenu from "./MobileMenu";
 import { navLinks } from "@/constants/navbar";
@@ -11,6 +13,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [catHover, setCatHover] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 10);
@@ -28,8 +31,9 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto h-full px-4 md:px-8 flex items-center justify-between">
 
           {/* Logo */}
-          <Link href="/" className="font-[var(--font-playfair)] text-xl md:text-2xl font-bold text-[var(--primary)] shrink-0">
-            Fashion Pahnawa
+          <Link href="/" className="shrink-0 flex items-center gap-2">
+            <Image src="/logo.jpeg" alt="Fashion Pahnawa" width={120} height={48} className="h-10 w-auto object-contain" priority />
+            <span className="font-[var(--font-playfair)] text-lg md:text-xl font-bold text-[var(--primary)]">Fashion Pahnawa</span>
           </Link>
 
           {/* Desktop Menu */}
@@ -37,9 +41,15 @@ export default function Navbar() {
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link href={link.href}
-                  className="relative px-3 py-2 text-sm text-[var(--foreground)] hover:text-[var(--primary)] transition-colors group">
+                  className={`relative px-3 py-2 text-sm transition-colors group ${
+                    pathname === link.href
+                      ? "text-[var(--primary)]"
+                      : "text-[var(--foreground)] hover:text-[var(--primary)]"
+                  }`}>
                   {link.label}
-                  <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-[var(--primary)] scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
+                  <span className={`absolute bottom-0 left-3 right-3 h-0.5 bg-[var(--primary)] transition-transform origin-left ${
+                    pathname === link.href ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                  }`} />
                 </Link>
               </li>
             ))}
@@ -58,25 +68,23 @@ export default function Navbar() {
           </ul>
 
           {/* Right Side */}
-          <div className="flex items-center gap-3">
-            {/* Search Box - Desktop */}
-            <div className="hidden md:flex items-center gap-2 bg-[var(--surface)] border border-[var(--border)] rounded-lg px-3 py-2 w-52 focus-within:border-[var(--primary)] transition-colors">
-              <Search size={15} className="text-[var(--muted-foreground)] shrink-0" />
-              <input
-                type="text"
-                placeholder="Search products..."
-                className="bg-transparent outline-none text-sm text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] w-full"
-              />
-            </div>
+          <div className="flex items-center gap-1 ml-3 sm:gap-3">
+            <Link href="/login"
+              className="hidden md:inline-flex items-center px-4 py-2 text-sm border border-[var(--border)] text-[var(--foreground)] rounded hover:border-[var(--primary)] hover:text-[var(--primary)] transition-all">
+              Login
+            </Link>
 
-            {/* Search Icon - Mobile */}
-            <button className="md:hidden p-2 text-[var(--foreground)] hover:text-[var(--primary)] transition-colors">
-              <Search size={20} />
-            </button>
+            <Link href="/register"
+              className="hidden md:inline-flex items-center px-4 py-2 text-sm bg-[var(--primary)] text-white rounded hover:opacity-90 transition-opacity">
+              Register
+            </Link>
 
-            <Link href="/products"
-              className="hidden md:inline-flex items-center px-4 py-2 text-sm bg-[var(--primary)] text-white rounded-lg hover:opacity-90 transition-opacity">
-              Shop Now
+            {/* Mobile Login/Register */}
+            <Link href="/login" className="md:hidden px-3 py-1.5 text-xs border border-[var(--border)] text-[var(--foreground)] rounded hover:border-[var(--primary)] hover:text-[var(--primary)] transition-all">
+              Login
+            </Link>
+            <Link href="/register" className="md:hidden px-3 py-1.5 text-xs bg-[var(--primary)] text-white rounded hover:opacity-90 transition-opacity">
+              Register
             </Link>
 
             {/* Mobile Menu Button */}
