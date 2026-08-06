@@ -1,14 +1,15 @@
-import BestSellers from "@/components/home/BestSellers";
-import Categories from "@/components/home/Categories";
-import FeaturedCollection from "@/components/home/FeaturedCollection";
+import dynamic from "next/dynamic";
 import Hero from "@/components/home/Hero";
-import NewArrivals from "@/components/home/NewArrivals";
-import PromotionalBanner from "@/components/home/PromotionalBanner";
-import TrendingProducts from "@/components/home/TrendingProducts";
-import WhyChooseUs from "@/components/home/WhyChooseUs";
-import CustomerReviews from "@/components/home/CustomerReviews";
-import InstagramGallery from "@/components/home/InstagramGallery";
-// import Newsletter from "@/components/home/Newsletter";
+
+const Categories = dynamic(() => import("@/components/home/Categories"));
+const NewArrivals = dynamic(() => import("@/components/home/NewArrivals"));
+const PromotionalBanner = dynamic(() => import("@/components/home/PromotionalBanner"));
+const FeaturedCollection = dynamic(() => import("@/components/home/FeaturedCollection"));
+const TrendingProducts = dynamic(() => import("@/components/home/TrendingProducts"));
+const WhyChooseUs = dynamic(() => import("@/components/home/WhyChooseUs"));
+const BestSellers = dynamic(() => import("@/components/home/BestSellers"));
+const CustomerReviews = dynamic(() => import("@/components/home/CustomerReviews"));
+const InstagramGallery = dynamic(() => import("@/components/home/InstagramGallery"));
 
 export default function Home() {
   return (
@@ -23,7 +24,6 @@ export default function Home() {
       <BestSellers />
       <CustomerReviews />
       <InstagramGallery />
-      {/* <Newsletter /> */}
     </>
   );
 }
