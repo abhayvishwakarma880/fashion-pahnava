@@ -1,9 +1,8 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { FaWhatsapp, FaInstagram, FaFacebook, FaPhone } from "react-icons/fa";
+import { FaInstagram, FaFacebook, FaPhone } from "react-icons/fa";
 import { Sun, Moon } from "lucide-react";
-import { WHATSAPP_NUMBER } from "@/constants/navbar";
 
 export default function TopBar() {
   const { theme, setTheme } = useTheme();
@@ -18,11 +17,7 @@ export default function TopBar() {
           <FaPhone size={11} />
           <span className="hidden md:inline">Call Us</span>
         </a>
-        <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer" className="flex items-center gap-1 hover:text-[var(--accent)] transition-colors">
-          <FaWhatsapp size={13} />
-          <span className="hidden md:inline">WhatsApp</span>
-        </a>
-        <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-[var(--accent)] transition-colors">
+        <a href="https://instagram.com/fashion_pehnava1" target="_blank" rel="noreferrer" className="hover:text-[var(--accent)] transition-colors">
           <FaInstagram size={13} />
         </a>
         <a href="https://facebook.com" target="_blank" rel="noreferrer" className="hover:text-[var(--accent)] transition-colors">

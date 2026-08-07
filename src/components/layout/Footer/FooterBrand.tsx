@@ -14,7 +14,7 @@ export default function FooterBrand() {
       <div className="flex flex-col gap-2.5 mt-1">
         {[
           { icon: MapPin, text: "Lucknow, Uttar Pradesh" },
-          { icon: Mail, text: "support@fashionpahnawa.com" },
+          { icon: Mail, text: "fpehnava29@gmail.com" },
           { icon: Phone, text: "+91 9876543210" },
         ].map(({ icon: Icon, text }) => (
           <div key={text} className="flex items-center gap-2 text-sm text-[#BDBDBD]">

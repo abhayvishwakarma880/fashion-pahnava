@@ -1,0 +1,24 @@
+export const products = [
+  { id: 1, name: "Designer Silk Saree", description: "Pure silk saree with intricate golden border and traditional zari work. Perfect for weddings and special occasions.", category: "Women", subcategory: "Ladies Saree", price: 3499, originalPrice: 4999, image: "https://i.pinimg.com/474x/89/71/57/89715740b94af3e36559d2f82a82667b.jpg", isNew: true, discount: 30 },
+  { id: 2, name: "Banarasi Lehenga", description: "Handwoven Banarasi lehenga with rich silk fabric and intricate embroidery patterns. A timeless ethnic masterpiece.", category: "Women", subcategory: "Ladies Lehenga", price: 8999, originalPrice: 12999, image: "https://i.pinimg.com/originals/8a/db/d8/8adbd824b14afa78db10ca20ee454c18.jpg", isNew: true, discount: 31 },
+  { id: 3, name: "Ladies Fancy Suit", description: "Elegant ladies suit with beautiful embroidery and premium fabric. Ideal for festive and casual occasions.", category: "Women", subcategory: "Ladies Suit", price: 2499, originalPrice: 3499, image: "https://i.pinimg.com/736x/64/4d/9f/644d9fef85e21ff063503a2a8badd86f.jpg", isNew: false, discount: 29 },
+  { id: 4, name: "Slim Fit Formal Shirt", description: "Premium slim fit formal shirt crafted from breathable cotton blend. Perfect for office and business meetings.", category: "Men", subcategory: "Formal Shirts", price: 1299, originalPrice: 1999, image: "https://i.pinimg.com/736x/2a/bf/3b/2abf3bc87f9d23b6df616d9451e72815.jpg", isNew: false, discount: 35 },
+  { id: 5, name: "Embroidered Kurta Set", description: "Handcrafted kurta set with intricate embroidery and comfortable fabric. Great for weddings and celebrations.", category: "Men", subcategory: "Shirts", price: 3999, originalPrice: 5999, image: "https://i.pinimg.com/474x/f8/fe/a3/f8fea33af02a4ed02033f3dc97894b42.jpg", isNew: true, discount: 33 },
+  { id: 6, name: "Slim Fit Jeans", description: "Stylish slim fit jeans made from premium denim fabric. Versatile and comfortable for everyday wear.", category: "Men", subcategory: "Jeans", price: 1799, originalPrice: 2499, image: "https://avatars.mds.yandex.net/i?id=6b4fe474d3d57523827dc4e64ad530c730089dc7-16401366-images-thumbs&n=13", isNew: false, discount: 28 },
+  { id: 7, name: "Oxidized Jewelry Set", description: "Beautiful oxidized silver jewelry set with traditional Indian designs. Perfect for ethnic outfits and occasions.", category: "Accessories", subcategory: "Accessories", price: 1299, originalPrice: 1999, image: "https://i.pinimg.com/736x/64/4d/9f/644d9fef85e21ff063503a2a8badd86f.jpg", isNew: true, discount: 35 },
+  { id: 8, name: "Ladies Fancy Dress", description: "Stunning fancy dress with premium fabric and elegant design. Ideal for parties and special events.", category: "Women", subcategory: "Ladies Fancy Dress", price: 4499, originalPrice: 6499, image: "https://i.pinimg.com/474x/89/71/57/89715740b94af3e36559d2f82a82667b.jpg", isNew: false, discount: 31 },
+  { id: 9, name: "Formal Trousers", description: "Classic formal trousers with a sharp cut and premium finish. A wardrobe essential for every professional.", category: "Men", subcategory: "Formal Pants", price: 1599, originalPrice: 2299, image: "https://i.pinimg.com/736x/2a/bf/3b/2abf3bc87f9d23b6df616d9451e72815.jpg", isNew: false, discount: 30 },
+  { id: 10, name: "Premium Sunglasses", description: "Trendy premium sunglasses with UV protection lenses and durable frame. Style meets functionality.", category: "Accessories", subcategory: "Accessories", price: 899, originalPrice: 1499, image: "https://i.pinimg.com/originals/8a/db/d8/8adbd824b14afa78db10ca20ee454c18.jpg", isNew: true, discount: 40 },
+  { id: 11, name: "Cotton T-Shirt", description: "Soft and breathable cotton t-shirt with a comfortable fit. Perfect for casual everyday wear.", category: "Men", subcategory: "T-Shirts", price: 699, originalPrice: 999, image: "https://i.pinimg.com/474x/f8/fe/a3/f8fea33af02a4ed02033f3dc97894b42.jpg", isNew: false, discount: 30 },
+  { id: 12, name: "Silk Dupatta Suit", description: "Graceful silk dupatta suit with fine embroidery and rich texture. A perfect blend of tradition and elegance.", category: "Women", subcategory: "Ladies Suit", price: 3299, originalPrice: 4799, image: "https://i.pinimg.com/736x/64/4d/9f/644d9fef85e21ff063503a2a8badd86f.jpg", isNew: true, discount: 31 },
+];
+
+export const filterCategories = ["Women", "Men", "Accessories"];
+export const filterColors = ["Red", "Blue", "Black", "White", "Pink", "Green", "Gold", "Silver", "Grey", "Cream", "Purple", "Yellow", "Brown"];
+export const filterSizes = ["XS", "S", "M", "L", "XL", "XXL", "30", "32", "34", "36", "Free Size"];
+export const sortOptions = [
+  { label: "Latest", value: "latest" },
+  { label: "Price: Low to High", value: "price_asc" },
+  { label: "Price: High to Low", value: "price_desc" },
+  { label: "Discount", value: "discount" },
+];

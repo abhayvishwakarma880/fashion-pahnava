@@ -17,7 +17,7 @@ export const customerLinks = [
 ];
 
 export const socialLinks = [
-  { title: "Instagram", href: "https://instagram.com/fashionpahnava", icon: "instagram" },
+  { title: "Instagram", href: "https://instagram.com/fashion_pehnava1", icon: "instagram" },
   { title: "Facebook", href: "https://facebook.com/fashionpahnava", icon: "facebook" },
   { title: "Pinterest", href: "https://pinterest.com/fashionpahnava", icon: "pinterest" },
   { title: "YouTube", href: "https://youtube.com/@fashionpahnava", icon: "youtube" },

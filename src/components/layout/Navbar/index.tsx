@@ -3,11 +3,13 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { FaWhatsapp } from "react-icons/fa";
 import { Menu } from "lucide-react";
 import Image from "next/image";
+import logoImg from "@/assets/logo.png";
 import MegaMenu from "./MegaMenu";
 import MobileMenu from "./MobileMenu";
-import { navLinks } from "@/constants/navbar";
+import { navLinks, WHATSAPP_NUMBER } from "@/constants/navbar";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -31,9 +33,8 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto h-full px-4 md:px-8 flex items-center justify-between">
 
           {/* Logo */}
-          <Link href="/" className="shrink-0 flex items-center gap-2">
-            <Image src="/logo.jpeg" alt="Fashion Pahnawa" width={120} height={48} className="h-10 w-auto object-contain" priority />
-            <span className="font-[var(--font-playfair)] text-lg md:text-xl font-bold text-[var(--primary)]">Fashion Pahnawa</span>
+          <Link href="/" className="shrink-0">
+            <Image src={logoImg} alt="Fashion Pahnawa" width={200} height={56} className="h-12 w-auto object-contain" priority />
           </Link>
 
           {/* Desktop Menu */}
@@ -69,23 +70,24 @@ export default function Navbar() {
 
           {/* Right Side */}
           <div className="flex items-center gap-1 ml-3 sm:gap-3">
-            <Link href="/login"
-              className="hidden md:inline-flex items-center px-4 py-2 text-sm border border-[var(--border)] text-[var(--foreground)] rounded hover:border-[var(--primary)] hover:text-[var(--primary)] transition-all">
-              Login
-            </Link>
+            {/* Desktop WhatsApp Button */}
+            <a
+              href={`https://wa.me/${WHATSAPP_NUMBER}`}
+              target="_blank"
+              rel="noreferrer"
+              className="hidden md:inline-flex items-center gap-2 px-4 py-2 text-sm bg-[var(--primary)] text-white rounded hover:opacity-90 transition-opacity">
+              <FaWhatsapp size={16} />
+              WhatsApp
+            </a>
 
-            <Link href="/register"
-              className="hidden md:inline-flex items-center px-4 py-2 text-sm bg-[var(--primary)] text-white rounded hover:opacity-90 transition-opacity">
-              Register
-            </Link>
-
-            {/* Mobile Login/Register */}
-            <Link href="/login" className="md:hidden px-3 py-1.5 text-xs border border-[var(--border)] text-[var(--foreground)] rounded hover:border-[var(--primary)] hover:text-[var(--primary)] transition-all">
-              Login
-            </Link>
-            <Link href="/register" className="md:hidden px-3 py-1.5 text-xs bg-[var(--primary)] text-white rounded hover:opacity-90 transition-opacity">
-              Register
-            </Link>
+            {/* Mobile WhatsApp Button */}
+            <a
+              href={`https://wa.me/${WHATSAPP_NUMBER}`}
+              target="_blank"
+              rel="noreferrer"
+              className="md:hidden p-2 text-[var(--foreground)] hover:text-[var(--primary)] transition-colors">
+              <FaWhatsapp size={20} />
+            </a>
 
             {/* Mobile Menu Button */}
             <button onClick={() => setMobileOpen(true)} className="p-2 md:hidden text-[var(--foreground)] hover:text-[var(--primary)] transition-colors">
