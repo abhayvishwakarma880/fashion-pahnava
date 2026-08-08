@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { X, CheckCircle, Loader2 } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
-import { WHATSAPP_NUMBER } from "@/constants/navbar";
+import { X, CheckCircle, Loader2, Package } from "lucide-react";
 
 type Product = { name: string; price: number; image?: string };
 
@@ -27,6 +25,7 @@ export default function BookingModal({ product, onClose }: { product: Product; o
   const [pincodeLoading, setPincodeLoading] = useState(false);
   const [pincodeError, setPincodeError] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [orderId, setOrderId] = useState("");
 
   useEffect(() => {
     const t = requestAnimationFrame(() => setVisible(true));
@@ -83,20 +82,17 @@ export default function BookingModal({ product, onClose }: { product: Product; o
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const msg = encodeURIComponent(
-      `🛍️ *New Order - Fashion Pehnava*\n\n` +
-      `*Product:* ${product.name}\n` +
-      `*Price:* ₹${product.price.toLocaleString()}\n\n` +
-      `*Customer Details:*\n` +
-      `Name: ${form.name}\n` +
-      `Phone: ${form.phone}\n` +
-      `Email: ${form.email || "N/A"}\n\n` +
-      `*Delivery Address:*\n` +
-      `${form.address}\n` +
-      `${form.district}, ${form.state}\n` +
-      `Pincode: ${form.pincode}`
-    );
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank");
+    const order = {
+      id: `FP-${Date.now()}`,
+      product: { name: product.name, price: product.price, image: product.image },
+      customer: { name: form.name, phone: form.phone, email: form.email },
+      address: { pincode: form.pincode, district: form.district, state: form.state, full: form.address },
+      status: "Confirmed",
+      placedAt: new Date().toISOString(),
+    };
+    const existing = JSON.parse(localStorage.getItem("fp_orders") || "[]");
+    localStorage.setItem("fp_orders", JSON.stringify([order, ...existing]));
+    setOrderId(order.id);
     setSubmitted(true);
   }
 
@@ -135,15 +131,29 @@ export default function BookingModal({ product, onClose }: { product: Product; o
         {/* Body */}
         <div className="overflow-y-auto flex-1 px-5 py-5">
           {submitted ? (
-            <div className="flex flex-col items-center justify-center gap-4 py-10 text-center">
-              <CheckCircle size={52} className="text-green-500" />
-              <h3 className="text-lg font-bold text-[var(--foreground)]">Order Sent!</h3>
-              <p className="text-sm text-[var(--muted-foreground)]">
-                Your booking details have been sent via WhatsApp. We'll confirm your order shortly.
+            <div className="flex flex-col items-center justify-center gap-3 py-8 text-center">
+              <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center">
+                <CheckCircle size={36} className="text-green-500" />
+              </div>
+              <h3 className="text-xl font-bold text-[var(--foreground)] font-[var(--font-playfair)]">Order Placed!</h3>
+              <p className="text-sm text-[var(--muted-foreground)] max-w-xs">
+                Your order has been confirmed. We'll contact you on <span className="text-[var(--foreground)] font-medium">{form.phone}</span> shortly.
               </p>
+              <div className="w-full bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4 text-left space-y-2 mt-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <Package size={14} className="text-[var(--primary)]" />
+                  <span className="text-xs font-semibold text-[var(--foreground)] uppercase tracking-wider">Order Summary</span>
+                </div>
+                <Row label="Order ID" value={orderId} highlight />
+                <Row label="Product" value={product.name} />
+                <Row label="Amount" value={`₹${product.price.toLocaleString()}`} />
+                <Row label="Name" value={form.name} />
+                <Row label="Deliver to" value={`${form.address}, ${form.district}, ${form.state} - ${form.pincode}`} />
+                <Row label="Status" value="Confirmed ✓" highlight />
+              </div>
               <button onClick={handleClose}
-                className="mt-2 px-6 py-2.5 bg-[var(--primary)] text-white text-sm font-semibold rounded hover:opacity-90 transition-opacity">
-                Close
+                className="mt-2 w-full px-6 py-2.5 bg-[var(--primary)] text-white text-sm font-semibold rounded hover:opacity-90 transition-opacity">
+                Done
               </button>
             </div>
           ) : (
@@ -243,6 +253,15 @@ function Field({ label, name, value, onChange, placeholder, type = "text", requi
         type={type} required={required} pattern={pattern}
         className={inputCls}
       />
+    </div>
+  );
+}
+
+function Row({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
+  return (
+    <div className="flex justify-between gap-2 text-xs">
+      <span className="text-[var(--muted-foreground)] shrink-0">{label}</span>
+      <span className={`text-right font-medium ${highlight ? "text-[var(--primary)]" : "text-[var(--foreground)]"}`}>{value}</span>
     </div>
   );
 }
