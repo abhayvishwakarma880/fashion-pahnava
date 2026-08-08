@@ -2,10 +2,9 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { FaWhatsapp } from "react-icons/fa";
 import { Eye } from "lucide-react";
-import { WHATSAPP_NUMBER } from "@/constants/navbar";
 import QuickView from "./QuickView";
+import BookingModal from "./BookingModal";
 
 type Product = {
   id: number;
@@ -21,6 +20,7 @@ type Product = {
 
 export default function ProductCard({ product }: { product: Product }) {
   const [quickView, setQuickView] = useState(false);
+  const [booking, setBooking] = useState(false);
 
   return (
     <>
@@ -75,19 +75,17 @@ export default function ProductCard({ product }: { product: Product }) {
           </div>
 
           {/* Book Now */}
-          <a
-            href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hi, I want to book: ${product.name} (₹${product.price})`}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            onClick={() => setBooking(true)}
             className="w-full flex items-center justify-center gap-2 bg-[var(--primary)] text-white py-2 rounded text-xs font-semibold hover:opacity-90 transition-opacity"
           >
-            {/* <FaWhatsapp size={14} /> */}
             Book Now
-          </a>
+          </button>
         </div>
       </div>
 
       {quickView && <QuickView product={product} onClose={() => setQuickView(false)} />}
+      {booking && <BookingModal product={product} onClose={() => setBooking(false)} />}
     </>
   );
 }

@@ -16,8 +16,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Fashion Pahnawa",
-  description: "Premium Fashion Store",
+  title: {
+    default: "Fashion Pehnava",
+    template: "%s | Fashion Pehnava",
+  },
+  description: "Premium Fashion Store for Men, Women & Kids. Discover trendy collections designed with comfort, elegance, and quality.",
   icons: {
     icon: "/logo.jpeg",
   },

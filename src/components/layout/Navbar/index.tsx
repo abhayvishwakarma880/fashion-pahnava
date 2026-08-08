@@ -56,7 +56,7 @@ export default function Navbar() {
             ))}
 
             {/* Categories with Mega Menu */}
-            <li className="relative" onMouseEnter={() => setCatHover(true)} onMouseLeave={() => setCatHover(false)}>
+            {/* <li className="relative" onMouseEnter={() => setCatHover(true)} onMouseLeave={() => setCatHover(false)}>
               <button className="relative px-3 py-2 text-sm text-[var(--foreground)] hover:text-[var(--primary)] transition-colors flex items-center gap-1 group">
                 Categories
                 <svg className={`w-3 h-3 transition-transform ${catHover ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -65,7 +65,7 @@ export default function Navbar() {
                 <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-[var(--primary)] scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
               </button>
               {catHover && <MegaMenu />}
-            </li>
+            </li> */}
           </ul>
 
           {/* Right Side */}

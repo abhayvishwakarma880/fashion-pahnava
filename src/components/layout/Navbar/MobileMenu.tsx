@@ -60,7 +60,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
           ))}
 
           {/* Categories Accordion */}
-          <button
+          {/* <button
             onClick={() => setCatOpen(!catOpen)}
             className="py-3 flex items-center justify-between text-sm text-[var(--foreground)] border-b border-[var(--border)] hover:text-[var(--primary)] transition-colors"
           >
@@ -69,7 +69,7 @@ export default function MobileMenu({ onClose }: { onClose: () => void }) {
               size={16}
               className={`transition-transform duration-300 ${catOpen ? "rotate-180" : ""}`}
             />
-          </button>
+          </button> */}
 
           {/* Smooth Accordion */}
           <div className={`overflow-hidden transition-all duration-300 ease-in-out ${catOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"}`}>

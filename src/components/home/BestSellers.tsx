@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import BookingModal from "@/components/products/BookingModal";
 
 const bestSellers = [
   {
@@ -80,6 +81,7 @@ const bestSellers = [
 ];
 
 export default function BestSellers() {
+  const [bookingProduct, setBookingProduct] = useState<typeof bestSellers[0] | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -234,7 +236,9 @@ export default function BestSellers() {
                   </div>
 
                   {/* Book Now Button */}
-                  <button className="w-full bg-[var(--primary)] text-white py-1.5 md:py-2.5 rounded text-[10px] md:text-sm font-medium hover:opacity-90 transition-all hover:shadow-lg hover:shadow-[var(--primary)]/30 transform hover:scale-[1.02] duration-300 flex items-center justify-center gap-1.5 md:gap-2 group">
+                  <button
+                    onClick={() => setBookingProduct(product)}
+                    className="w-full bg-[var(--primary)] text-white py-1.5 md:py-2.5 rounded text-[10px] md:text-sm font-medium hover:opacity-90 transition-all hover:shadow-lg hover:shadow-[var(--primary)]/30 transform hover:scale-[1.02] duration-300 flex items-center justify-center gap-1.5 md:gap-2 group">
                     <svg className="w-3 h-3 md:w-4 md:h-4 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                     </svg>
@@ -268,6 +272,8 @@ export default function BestSellers() {
           </div>
         </div>
       </div>
+
+      {bookingProduct && <BookingModal product={bookingProduct} onClose={() => setBookingProduct(null)} />}
 
       <style jsx>{`
         .product-card.animate-in {
